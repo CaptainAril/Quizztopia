@@ -10,6 +10,8 @@ from models.user import User
 from models.question import Question
 from models.session import Session
 
+classes = {"User": User, "Question": Question, "Session": Session}
+
 class DBStorage:
     """Interacts with the MySql database"""
     __engine = None
@@ -41,3 +43,28 @@ class DBStorage:
 
     def save(self):
         self.__session.commit()
+
+    def delete(self, obj=None):
+        if obj is not None:
+            self.__session.delete(obj)
+
+    def all(self, cls=None):
+        obj_dict = {}
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                objs = self.__session.query(classes[clss]).all()
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    obj_dict[key] = obj
+        return obj_dict
+
+    def get(self, cls, id):
+        if cls not in classes.values():
+            return None
+
+        all_cls = models.storage.all(cls)
+        for obj in all_cls.values():
+            if obj.id == id:
+                return obj
+        
+        return None

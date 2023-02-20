@@ -6,7 +6,7 @@ class Question(BaseModel, Base):
     """Define question class"""
     __tablename__ = 'questions'
 
-    category = Column(String(32), nullable=False)
+    category = Column(String(62), nullable=False)
     question = Column(String(1025), nullable=False)
     answers = Column(JSON, nullable=False)
     correct_answer = Column(String(1025), nullable=False)
