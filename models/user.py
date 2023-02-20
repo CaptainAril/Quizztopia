@@ -17,13 +17,15 @@ class User(BaseModel, Base):
     nationality = Column(String(35), nullable=True)
     joined_at = Column(DateTime(), default=datetime.now, nullable=False)
     last_logged_in = Column(DateTime(), nullable=True)
-    sessions = relationship("Session", backref="user")
+    sessions = relationship("Session", backref="user", cascade="all, delete, delete-orphan")
 
     
     def __init__(self, *args, **kwargs):
         if 'password' in kwargs.keys():
             kwargs['password'] = self.set_password(kwargs['password'])
+        self.joined_at = datetime.now()
         super().__init__(*args, **kwargs)
+        # self.__delattr__('created_at')
 
     def set_password(self, password):
         """Encodes password"""

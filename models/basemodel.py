@@ -47,4 +47,4 @@ class BaseModel:
 
     
     def delete(self):
-        pass
+        models.storage.delete(self)
