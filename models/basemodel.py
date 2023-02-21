@@ -24,13 +24,15 @@ class BaseModel:
         self.updated_at = self.created_at
          
         for key, value in kwargs.items():
-            if key in ['id', 'created_at', 'updated_at']:
-                pass
+            # if key in ['id', 'created_at', 'updated_at']:
+            #     pass
             setattr(self, key, value)
 
 
     def to_dict(self):
         model_dict = self.__dict__.copy()
+        if '_sa_instance_state' in model_dict:
+            del(model_dict['_sa_instance_state'])
         model_dict['__class__'] = self.__class__.__name__
         model_dict['created_at'] = self.created_at.isoformat()
         model_dict['updated_at'] = self.updated_at.isoformat()

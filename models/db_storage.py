@@ -8,9 +8,15 @@ from models.basemodel import Base
 import models
 from models.user import User
 from models.question import Question
+from models.category import Category
 from models.session import Session
 
-classes = {"User": User, "Question": Question, "Session": Session}
+classes = {
+    "User": User,
+    "Question": Question,
+    "Session": Session,
+    "Categry": Category
+    }
 
 class DBStorage:
     """Interacts with the MySql database"""
@@ -32,7 +38,7 @@ class DBStorage:
 
 
     def reload(self):
-        Base.metadata.drop_all(self.__engine)
+        # Base.metadata.drop_all(self.__engine)
         Base.metadata.create_all(self.__engine)
         sess_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
         Session = scoped_session(sess_factory)
