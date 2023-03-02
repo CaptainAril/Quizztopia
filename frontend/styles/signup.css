@@ -1,0 +1,73 @@
+body {
+    background-color: rgb(86, 46, 133);
+}
+
+/* Container for the sign up page */
+.container {
+	width: 80%;
+	max-width: 500px;
+    height: fit-content;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: rgb(86, 46, 133);
+	box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    /* text-align: center; */
+	border-radius: 5px;
+}
+
+/* Heading for the sign up page */
+h1 {
+	margin-bottom: 20px;
+	text-align: center;
+	font-size: 2rem;
+	color: #333;
+}
+
+/* Labels for the form inputs */
+label {
+	display: block;
+	margin-bottom: 5px;
+	color: #333;
+	font-size: 1.2rem;
+	font-weight: bold;
+}
+
+/* Form inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-radius: 3px;
+	margin-bottom: 20px;
+	background-color: #f1f1f1;
+	font-size: 1.2rem;
+	color: #333;
+}
+
+/* Submit button */
+input[type="submit"] {
+	background-color: #008000;
+	color: #fff;
+	font-size: 1.2rem;
+	padding: 10px;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+
+/* Link to the login page */
+p {
+	margin-top: 20px;
+	font-size: 1rem;
+	text-align: center;
+	color: #333;
+}
+
+a {
+	color: #008000;
+	font-weight: bold;
+	text-decoration: none;
+}
