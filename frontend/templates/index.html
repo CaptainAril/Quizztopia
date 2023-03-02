@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quizztopia - The Ultimate Trivia Arena</title>
-    <link rel="stylesheet" href="gpt.css">
+    <link rel="stylesheet" href="/frontend/styles/quizztopia.css">
+    <link rel="stylesheet" href="/frontend/styles/index.css">
+    
   </head>
   <body>
-    <header>
-      <nav>
+    <header class="header">
+      <img src="/frontend/images/logo.png" alt="logo" class="logo">
+      <div class="title">
+        <h1>Quizztopia</h1>
+        <h2>The Ultimate Trivia Arena</h2>
+      </div>
+      
+      <nav class="nav">
         <ul>
           <li><a href="#">Login</a></li>
           <li><a href="#">Sign up</a></li>
@@ -16,13 +24,10 @@
           <li><a href="#">About</a></li>
         </ul>
       </nav>
-      <div class="logo">
-        <h1>Quizztopia</h1>
-        <h2>The Ultimate Trivia Arena</h2>
-      </div>
-      <a href="#" class="cta">Play Now</a>
+      
+      <!-- <a href="/frontend/templates/play.html" class="cta">Play Now</a> -->
     </header>
-    <main>
+    <main class="main">
       <section class="features">
         <div class="feature">
           <i class="fas fa-question"></i>
@@ -39,11 +44,12 @@
           <h3>Connect With Friends</h3>
           <p>Invite your friends to play and challenge each other on the leaderboard.</p>
         </div>
+        <section class="cta-banner">
+          <h2>Join the Fun</h2>
+          <a href="/frontend/templates/play.html" class="cta">Get Started</a>
+        </section>
       </section>
-      <section class="cta-banner">
-        <h2>Join the Fun Today</h2>
-        <a href="#" class="cta">Get Started</a>
-      </section>
+      
     </main>
     <footer>
       <p>&copy; 2023 Quizztopia. All rights reserved.</p>

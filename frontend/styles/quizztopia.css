@@ -1,8 +1,3 @@
-*, *::before, *::after{
-    box-sizing: border-box;
-    font-size: Gotham Rounded;   
-}
-
 :root{
  --hue-neutral: 2001;
  --hue-wrong: 0;
@@ -11,16 +6,16 @@
 
 }
 
-body{
+.main{
     --hue: var(--hue-neutral);
     padding: 0;
     margin: 0;
     display: flex;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 80vh;
     justify-content: center;
     align-items: center;
-    background-color: hsl(var(--hue), 100%, 20%);
+    background-color: rgb(86, 46, 133);
 }
 
 body.correct{
