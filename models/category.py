@@ -8,5 +8,5 @@ class Category(BaseModel, Base):
     """Category model"""
     __tablename__ = 'categories'
 
-    name = Column(String(62), nullable=False)
-    category_questions = relationship('Question', backref="category")
+    name = Column(String(62), nullable=False, primary_key=True)
+    questions = relationship('Question', backref="category")

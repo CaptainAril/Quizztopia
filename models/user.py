@@ -4,9 +4,10 @@ from models.basemodel import Base, BaseModel
 from sqlalchemy import Column, String, DateTime, Boolean
 from datetime import datetime
 from sqlalchemy.orm import relationship
+from flask_login import UserMixin
 from hashlib import md5
 
-class User(BaseModel, Base):
+class User(BaseModel, Base, UserMixin):
     """Defines User class"""
     __tablename__ = 'users'
 
@@ -21,13 +22,13 @@ class User(BaseModel, Base):
 
     
     def __init__(self, *args, **kwargs):
-        if 'password' in kwargs.keys():
-            kwargs['password'] = self.set_password(kwargs['password'])
-        self.joined_at = datetime.now()
+        # if 'password' in kwargs.keys():
+        #     kwargs['password'] = self.set_password(kwargs['password'])
+        # self.joined_at = datetime.now()
         super().__init__(*args, **kwargs)
         # self.__delattr__('created_at')
 
-    def set_password(self, password):
-        """Encodes password"""
-        return md5(password.encode()).hexdigest()
+    # def set_password(self, password):
+    #     """Encodes password"""
+    #     return md5(password.encode()).hexdigest()
     

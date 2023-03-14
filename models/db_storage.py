@@ -15,7 +15,7 @@ classes = {
     "User": User,
     "Question": Question,
     "Session": Session,
-    "Categry": Category
+    "Category": Category
     }
 
 class DBStorage:
@@ -64,13 +64,25 @@ class DBStorage:
                     obj_dict[key] = obj
         return obj_dict
 
-    def get(self, cls, id):
+    def get(self, cls, id=None, **kwargs):
         if cls not in classes.values():
             return None
 
         all_cls = models.storage.all(cls)
         for obj in all_cls.values():
+            for key, value in kwargs.items():
+                try:
+                    if  getattr(obj, key) == value:
+                        return obj
+                except Exception as e:
+                    print(e)
+                    return None
+
             if obj.id == id:
                 return obj
         
         return None
+    
+    def close(self):
+        """Calls remove \method on the private session attribute."""
+        self.__session.remove()

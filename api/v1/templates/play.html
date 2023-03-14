@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<!-- <link rel="stylesheet" href="../static/styles/play.css"> -->
+{% endblock %}
+
+{% block scripts %}
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script> -->
+<!-- <script src="../static/scripts/play.js"></script> -->
+
+{% endblock %}
+
+{% block main%}
+
+  <div class="row py-4 justify-content-center">
+    <div class="col-lg-6 px-5">
+      <h1 class="text-center lead">Quiztopia - Play</h1>
+      <form class="p-3" method="POST" action="/play" id="play-form">
+        <label  class="form-label" for="category">Select categories</label>
+        <select class="form-control mb-3" name="category" id="category">
+          <option value="cat-0" selected autofocus>Random</option>
+          {% for category in categories | sort(attribute="name") %}
+          <option value="{{category.name}}">{{ category.name }}</option>
+          {% endfor %}
+              
+        </select>  
+
+        <label class="form-label" for="type">Select question type</label>
+          <select class="form-control mb-3" id="type" name="type">
+            <option value="multiple">Multiple Choice</option>
+            <option value="boolean">True/False</option>
+          </select>
+
+        <label class="form-label" for="difficulty">Select difficulty</label>
+          <select class="form-control mb-3" id="difficulty" name="difficulty">
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+
+          <button class="btn btn-primary mb-1" type="submit">Start</button>
+        
+      </form>
+    </div>
+      
+  </div>
+    
+
+{% endblock %}
