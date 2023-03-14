@@ -3,9 +3,10 @@
 
 from models import storage
 from api.v1.views import app_views, auth
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request, url_for
 from flask_login import LoginManager, current_user, login_required
 from models.user import User
+import requests
 from models.category import Category
 
 app = Flask(__name__)
@@ -33,9 +34,24 @@ def profile():
     return render_template('profile.html', name=current_user.username)
 
 @app.route('/play')
-def play():
+def get_play():
     categories = storage.all(Category)
-    return render_template('play.html', categories=categories.values())
+    return render_template('get_play.html', categories=categories.values())
+
+@app.route('/play', methods=['POST'])
+def play():
+    data = {}
+
+    data['category'] = request.form.get('category')
+    data['type'] = request.form.get('type')
+    data['difficulty'] = request.form.get('difficulty')
+
+    print(data)
+    r = requests.get('http://localhost:2000/' + url_for('app_views.get_questions'), json=data)
+    questions = r.json()
+    print(questions)
+    return render_template('play.html', questions=questions)
+
 
 @app.route('/stats', methods=['GET'])
 def get_stats():

@@ -4,32 +4,55 @@
 from api.v1.views import app_views
 from models import storage
 from models.question import Question
-from flask import jsonify, request, abort
+from models.category import Category
+from flask import jsonify, request, abort, url_for
+import random
 
 @app_views.route('/questions', methods=['GET'])
 def get_questions():
-    """Retrievs all questions in database."""
+    """Retrievs and filters questions in database."""
     try:
         data = request.get_json()
     except Exception:
         data = None
 
-    filter_questions = []
+    
+    __filter = {}
     count_max = 10
-    questions = storage.all(Question).values()
-    print(questions)
+    questions = list(storage.all(Question).values())
 
     if data:
-        filter_category = data.get('category')
-        filter_difficulty =  data.get('difficulty')
-        filter_count = data.get('count')
-        filter_type = data.get('type')
+        __cat = data.get('category')
+        category = storage.get(Category, None, name=__cat)
+        __filter['category_id'] = category.id if category else None
+        __filter['difficulty'] =  data.get('difficulty')
+        __filter['type'] = data.get('type')
+        count = data.get('count')
+        if count and count < count_max:
+            count_max = count
+        
+        quest_list = []
+        
+        for key, value in __filter.items():
+            if value:
+                filter_questions = []
+                for question in questions:
+                    if value == 'random':
+                        filter_questions = questions
+                    elif getattr(question, key) == value:
+                        filter_questions.append(question)
 
-        # for question in questions:
-        #     if filter_category and question.
-    
+                questions = filter_questions
+        
+        if len(questions) == 0:
+            return jsonify([])
+
+
+    if len(questions) > count_max:
+        questions = random.sample(set(questions), k=count_max)
     quest_list = list(map(lambda x: x.to_dict(), questions))
     return jsonify(quest_list)
+
 
 @app_views.route('/questions', methods=['POST'])
 def create_question():
