@@ -26,13 +26,15 @@ class DBStorage:
     def __init__(self):
         """Instantiates a DBStorage object"""
 
-        MYSQL_USER = getenv('MYSQL_USER')
-        MYSQL_PWD = getenv('MYSQL_PWD')
-        MYSQL_DB = getenv('MYSQL_DB')
+        MYSQL_USER = 'CaptainE'
+        MYSQL_PWD = '2475464_Bl'
+        MYSQL_DB = 'CaptainE$Quizztopia_dev_db'
+        MYSQL_HOST = 'CaptainE.mysql.pythonanywhere-services.com'
 
-        self.__engine = create_engine("mysql+mysqldb://{}:{}@localhost:3306/{}".format(
+        self.__engine = create_engine("mysql+mysqldb://{}:{}@{}:3306/{}".format(
                                       MYSQL_USER,
                                       MYSQL_PWD,
+                                      MYSQL_HOST,
                                       MYSQL_DB
                                     ), pool_pre_ping=True)
 
